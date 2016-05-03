@@ -27,4 +27,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'org.json:json:20160212'
     compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:multidex:1.0.0'
 }
