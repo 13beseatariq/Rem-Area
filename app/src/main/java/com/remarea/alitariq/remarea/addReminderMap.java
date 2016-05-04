@@ -1,6 +1,7 @@
 package com.remarea.alitariq.remarea;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -8,6 +9,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,10 +21,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class addReminderMap extends AppCompatActivity implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMapLongClickListener {
+        ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMapLongClickListener, View.OnClickListener {
 
     private GoogleMap mMap;
     private boolean mPermissionDenied = false;
+    private LatLng marker;
+
+    Button addReminderButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,13 @@ public class addReminderMap extends AppCompatActivity implements OnMapReadyCallb
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        marker = null;
+        addReminderButton = (Button) findViewById(R.id.addReminderButton);
+
+        addReminderButton.setOnClickListener(this);
+
+        addReminderButton.setVisibility(View.INVISIBLE);
     }
 
 
@@ -99,8 +112,23 @@ public class addReminderMap extends AppCompatActivity implements OnMapReadyCallb
 
     @Override
     public void onMapLongClick(LatLng latLng) {
-        mMap.addMarker(new MarkerOptions().position(latLng).title("You are here!").snippet("Consider yourself located"));
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
+        marker = latLng;
+
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(latLng).title("Add Reminder Here"));
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
         mMap.animateCamera(cameraUpdate);
+
+        addReminderButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == addReminderButton){
+            Intent myIntent = new Intent(this, AddReminderData.class);
+            myIntent.putExtra("lat", marker.latitude);
+            myIntent.putExtra("lon", marker.longitude);
+            this.startActivity(myIntent);
+        }
     }
 }
