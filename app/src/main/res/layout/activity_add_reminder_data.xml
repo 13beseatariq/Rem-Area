@@ -14,5 +14,72 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"></LinearLayout>
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Location"
+            android:id="@+id/location"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationDetail"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Define Radius"
+            android:id="@+id/radius"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="in meters"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/radiusData"
+            android:layout_gravity="center_horizontal"
+            android:shadowColor="#acacac" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Reminder Text"
+            android:id="@+id/reminderText"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/textData"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.18"
+            android:shadowColor="#989898" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Reminder"
+            android:id="@+id/addReminderButton"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
 </RelativeLayout>

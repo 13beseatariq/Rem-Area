@@ -116,8 +116,6 @@ public class addReminderMap extends AppCompatActivity implements OnMapReadyCallb
 
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(latLng).title("Add Reminder Here"));
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
-        mMap.animateCamera(cameraUpdate);
 
         addReminderButton.setVisibility(View.VISIBLE);
     }

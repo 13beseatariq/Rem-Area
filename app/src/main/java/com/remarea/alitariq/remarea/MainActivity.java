@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.v4.app.ShareCompat;
@@ -48,25 +49,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        progress = ProgressDialog.show(this, "Please Wait", "Connecting with Server!", true);
-
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
-        View v = findViewById(R.id.login);
-        View root = v.getRootView();
-        root.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-        username= (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-        login = (Button) findViewById(R.id.login);
-        register = (TextView) findViewById(R.id.register);
-        login.setOnClickListener(this);
-        register.setOnClickListener(this);
+        if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("EXIT", false)) {
+            finish();
+            return;
+        }
 
         new AsynchronousDatabaseConnector().execute();
+
+        SharedPreferences myPrefs = getSharedPreferences("RemAreaPrefs", MODE_PRIVATE);
+        if(myPrefs.getString("username", null) != null){
+            Intent myIntent = new Intent(MainActivity.this, userHome.class);
+            myIntent.putExtra("username", myPrefs.getString("username", null));
+            MainActivity.this.startActivity(myIntent);
+        }
+        else {
+            this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            setContentView(R.layout.activity_main);
+            View v = findViewById(R.id.login);
+            View root = v.getRootView();
+            root.setBackgroundColor(getResources().getColor(android.R.color.white));
+
+            username = (EditText) findViewById(R.id.username);
+            password = (EditText) findViewById(R.id.password);
+            login = (Button) findViewById(R.id.login);
+            register = (TextView) findViewById(R.id.register);
+            login.setOnClickListener(this);
+            register.setOnClickListener(this);
+        }
     }//OnCreate method ends here
+
+    public void onBackPressed() {
+        turnOff();
+    }
 
     @Override
     public void onClick(View v)
@@ -99,28 +115,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
             MongoClientURI uri = new MongoClientURI(addr);
             MongoClient mongoclient =  new MongoClient(uri);
             database = mongoclient.getDB(uri.getDatabase());
-            try {
-                database.command("ping");
-            } catch (MongoTimeoutException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        progress.dismiss();
-
-                        Toast.makeText(MainActivity.this, "Connection Failed!", Toast.LENGTH_LONG).show();
-
-                        turnOff();
-                    }
-                });
-            }
+//            try {
+//                database.command("ping");
+//            } catch (MongoTimeoutException e) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        Toast.makeText(MainActivity.this, "Connection Failed!", Toast.LENGTH_LONG).show();
+//
+//                        turnOff();
+//                    }
+//                });
+//            }
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            progress.dismiss();
-            Toast.makeText(MainActivity.this, "Connection Successful!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -135,6 +143,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 DBObject data = cursor.next();
 
                 if(data.get("password").equals(params[1])){
+                    SharedPreferences myPrefs = getSharedPreferences("RemAreaPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor e = myPrefs.edit();
+                    e.putString("username", params[0]);
+                    e.commit();
+
                     Intent myIntent = new Intent(MainActivity.this, userHome.class);
                     myIntent.putExtra("username", params[0]);
                     MainActivity.this.startActivity(myIntent);

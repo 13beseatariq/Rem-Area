@@ -12,6 +12,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -43,7 +44,20 @@
         <activity
             android:name=".addReminderMap"
             android:label="@string/title_activity_add_reminder_map" />
-        <activity android:name=".AddReminderData"></activity>
+        <activity android:name=".AddReminderData" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".viewReminders" />
+        <activity
+            android:name=".viewReminderonMap"
+            android:label="@string/title_activity_view_reminderon_map" />
+
+        <service
+            android:name=".alarmService"
+            android:exported="false"></service>
     </application>
 
 </manifest>
