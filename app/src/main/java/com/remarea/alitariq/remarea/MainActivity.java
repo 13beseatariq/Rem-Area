@@ -58,9 +58,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         SharedPreferences myPrefs = getSharedPreferences("RemAreaPrefs", MODE_PRIVATE);
         if(myPrefs.getString("username", null) != null){
-            Intent myIntent = new Intent(MainActivity.this, userHome.class);
+            Intent myIntent = new Intent(this, userHome.class);
             myIntent.putExtra("username", myPrefs.getString("username", null));
-            MainActivity.this.startActivity(myIntent);
+            this.startActivity(myIntent);
         }
         else {
             this.requestWindowFeature(Window.FEATURE_NO_TITLE);

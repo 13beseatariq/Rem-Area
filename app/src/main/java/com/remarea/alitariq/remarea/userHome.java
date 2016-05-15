@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -129,9 +130,8 @@ public class userHome extends AppCompatActivity implements View.OnClickListener 
         protected void onPostExecute(DBObject[] rows) {
             list_data = rows;
 
-            Intent i = new Intent(getApplicationContext(), alarmService.class);
-            i.putExtra("foo", "bar");
-            startService(i);
+            Intent in = new Intent(getApplicationContext(), alarmService.class);
+            startService(in);
         }
     }
 }
