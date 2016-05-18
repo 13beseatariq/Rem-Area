@@ -123,11 +123,11 @@ public class viewReminders extends ListActivity {
                 Date date = new Date((Long)rows[i].get("time"));
                 Double lat = (double)Math.round((Double)rows[i].get("lat") * 1000000d) / 1000000d;
                 Double lon = (double)Math.round((Double)rows[i].get("lon") * 1000000d) / 1000000d;
-                adapter.add("Location: " + (String)rows[i].get("address") + "\n"
+                adapter.add("\n" + "Location: " + (String)rows[i].get("address") + "\n"
                                 + "Coords: " + lat + "," + lon + "\n"
                                 + "Radius: " + (Integer)rows[i].get("radius") + "\n"
                                 + "Text: " + (String)rows[i].get("text") + "\n"
-                                + "Added on: " + date.toLocaleString() + "\n\n");
+                                + "Added on: " + date.toLocaleString() + "\n");
             }
             adapter.notifyDataSetChanged();
         }

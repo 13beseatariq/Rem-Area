@@ -124,6 +124,7 @@ public class AddReminderData extends AppCompatActivity implements View.OnClickLi
                         .append("radius", Integer.parseInt(params[0]))
                         .append("text", params[1])
                         .append("address", params[2])
+                        .append("snoozed", true)
                         .append("time", new Date().getTime());
                 coll.insert(doc);
 

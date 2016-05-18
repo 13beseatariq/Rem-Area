@@ -18,5 +18,10 @@
         android:layout_height="wrap_content"
         android:text="Add Reminder Here"
         android:id="@+id/addReminderButton"
-        android:layout_gravity="center_horizontal|bottom" />
+        android:layout_gravity="center_horizontal|bottom"
+        android:padding="20dp"
+        android:textSize="15dp"
+        android:textColor="@color/abc_secondary_text_material_dark"
+        android:background="@color/background_floating_material_dark"
+        android:textStyle="bold"/>
 </FrameLayout>

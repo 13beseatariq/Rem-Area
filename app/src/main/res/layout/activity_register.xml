@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.remarea.alitariq.remarea.RegisterActivity">
+    tools:context="com.remarea.alitariq.remarea.RegisterActivity"
+    android:background="#a4a4a4">
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +19,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:textSize="80px"
-        android:focusableInTouchMode="false" />
+        android:focusableInTouchMode="false"
+        android:textColor="#0098ff"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -71,9 +73,13 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/register"
-        android:layout_below="@+id/password1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp"
-        android:width="400px"/>
+        android:textColor="@color/abc_secondary_text_material_dark"
+        android:background="@color/background_floating_material_dark"
+        android:width="400px"
+        android:padding="20dp"
+        android:textSize="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/password1"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

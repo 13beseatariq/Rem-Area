@@ -1,5 +1,6 @@
 package com.remarea.alitariq.remarea;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +21,7 @@ import com.mongodb.MongoTimeoutException;
 
 import java.util.Date;
 
-public class userHome extends AppCompatActivity implements View.OnClickListener {
+public class userHome extends Activity implements View.OnClickListener {
     public static String username;
     public static DBObject[] list_data;
 
