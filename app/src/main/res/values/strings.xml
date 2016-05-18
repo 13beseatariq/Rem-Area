@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Rem Area</string>
 
+    <string name="facebook_app_id">243893595973894</string>
+
     <string name="title_activity_user_home">Rem Area</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>

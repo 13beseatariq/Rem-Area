@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.support.annotation.MainThread;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,9 +22,11 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoTimeoutException;
 
 import java.util.Date;
+import java.util.concurrent.CountDownLatch;
 
 public class userHome extends Activity implements View.OnClickListener {
     public static String username;
+    public static String name;
     public static DBObject[] list_data;
 
     Button addReminder, checkReminders;
@@ -32,6 +36,11 @@ public class userHome extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
+
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+        }
 
         welcomeUsername = (TextView) findViewById(R.id.welcomeUsername);
         addReminder = (Button) findViewById(R.id.addReminder);
@@ -43,9 +52,10 @@ public class userHome extends Activity implements View.OnClickListener {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             username = extras.getString("username");
+            name = extras.getString("name");
         }
 
-        welcomeUsername.setText("Welcome: " + username);
+        welcomeUsername.setText("Welcome: " + name);
 
         new getReminders().execute(username);
     }
@@ -76,6 +86,7 @@ public class userHome extends Activity implements View.OnClickListener {
                 SharedPreferences myPrefs = getSharedPreferences("RemAreaPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor e = myPrefs.edit();
                 e.remove("username");
+                e.remove("name");
                 e.commit();
 
                 Intent myIntent = new Intent(userHome.this, MainActivity.class);

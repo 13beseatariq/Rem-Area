@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:background="#a4a4a4">
+    android:background="@drawable/bg">
 
     <ListView
         android:layout_width="wrap_content"
@@ -20,6 +20,6 @@
         android:fastScrollEnabled="false"
         android:layout_margin="20dp"
         android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_color_selector"
-        android:textColor="@drawable/list_item_text_selector" />
+        android:listSelector="@android:color/white"
+        android:textColor="@android:color/holo_red_dark" />
 </LinearLayout>

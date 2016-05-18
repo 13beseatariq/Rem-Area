@@ -3,6 +3,7 @@ package com.remarea.alitariq.remarea;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import com.mongodb.MongoTimeoutException;
 import java.util.Date;
 
 public class RegisterActivity extends Activity  implements View.OnClickListener{
-    private EditText email, username, password, confirmPassword;
+    private EditText email, username, password, confirmPassword, name;
 
     ProgressDialog progress;
 
@@ -39,6 +40,7 @@ public class RegisterActivity extends Activity  implements View.OnClickListener{
 
         email = (EditText) findViewById(R.id.email);
         username = (EditText) findViewById(R.id.username);
+        name = (EditText) findViewById(R.id.name);
         password = (EditText) findViewById(R.id.password);
         confirmPassword = (EditText) findViewById(R.id.password1);
 
@@ -48,10 +50,10 @@ public class RegisterActivity extends Activity  implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == findViewById(R.id.register)){
-            if(password.getText().toString().equals(confirmPassword.getText().toString())){
+            if(password.getText().toString().equals(confirmPassword.getText().toString()) && !password.equals("")){
                 progress = ProgressDialog.show(this, "Please Wait", "Registering User!", true);
 
-                new AsynchronousRegisteration().execute(username.getText().toString(),
+                new AsynchronousRegisteration().execute(name.getText().toString(), username.getText().toString(),
                         email.getText().toString(), password.getText().toString());
             }
             else{
@@ -71,17 +73,25 @@ public class RegisterActivity extends Activity  implements View.OnClickListener{
         protected Void doInBackground(String... params) {
             DBCollection col = MainActivity.database.getCollection("users");
 
-            BasicDBObject doc = new BasicDBObject("username", params[0])
-                    .append("email", params[1])
-                    .append("password", params[2])
+            BasicDBObject doc = new BasicDBObject("name", params[0])
+                    .append("username", params[1])
+                    .append("email", params[2])
+                    .append("password", params[3])
                     .append("registeration_time", new Date().getTime());
             try {
                 col.insert(doc);
 
                 progress.dismiss();
 
+                SharedPreferences myPrefs = getSharedPreferences("RemAreaPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor e = myPrefs.edit();
+                e.putString("username", params[1]);
+                e.putString("name", params[0]);
+                e.commit();
+
                 Intent myIntent = new Intent(RegisterActivity.this, userHome.class);
-                myIntent.putExtra("username", params[0]);
+                myIntent.putExtra("username", params[1]);
+                myIntent.putExtra("name", params[0]);
                 RegisterActivity.this.startActivity(myIntent);
             }
             catch (MongoTimeoutException e){

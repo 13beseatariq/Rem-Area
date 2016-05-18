@@ -8,7 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.remarea.alitariq.remarea.AddReminderData"
-    android:background="#a4a4a4">
+    android:background="@drawable/bg">
+
 
     <LinearLayout
         android:orientation="vertical"
@@ -26,13 +27,15 @@
             android:layout_marginTop="10dp"
             android:id="@+id/location"
             android:layout_gravity="center_horizontal"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textColor="@android:color/holo_red_dark"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/locationDetail"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/holo_red_dark"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -42,7 +45,8 @@
             android:layout_marginTop="30dp"
             android:id="@+id/radius"
             android:layout_gravity="center_horizontal"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textColor="@android:color/holo_red_dark"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,7 +54,8 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="in meters"
             android:id="@+id/textView"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/holo_red_dark"/>
 
         <EditText
             android:layout_width="185dp"
@@ -59,7 +64,8 @@
             android:ems="10"
             android:id="@+id/radiusData"
             android:layout_gravity="center_horizontal"
-            android:shadowColor="#acacac" />
+            android:shadowColor="#acacac"
+            android:textColor="@android:color/holo_red_dark"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,7 +75,8 @@
             android:layout_marginTop="30dp"
             android:id="@+id/reminderText"
             android:layout_gravity="center_horizontal"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textColor="@android:color/holo_red_dark"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -79,7 +86,8 @@
             android:id="@+id/textData"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.18"
-            android:shadowColor="#989898" />
+            android:shadowColor="#989898"
+            android:textColor="@android:color/holo_red_dark"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -88,11 +96,11 @@
             android:id="@+id/addReminderButton"
             android:layout_marginTop="30dp"
             android:textColor="@color/abc_secondary_text_material_dark"
-            android:background="@color/background_floating_material_dark"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:padding="20dp"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:background="@drawable/roundbutton"/>
 
     </LinearLayout>
 </RelativeLayout>

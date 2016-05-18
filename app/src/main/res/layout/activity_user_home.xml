@@ -8,7 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.remarea.alitariq.remarea.userHome"
-    android:background="#a4a4a4">
+    android:background="@drawable/bg"
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,17 +18,20 @@
         android:id="@+id/welcomeUsername"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp"
+        android:textSize="35dp"
+        android:layout_marginTop="60dp"
         android:shadowColor="#a7a4a4"
         android:singleLine="false"
-        android:textColor="#0098ff"
-        android:textStyle="bold" />
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold"
+        />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/welcomeUsername"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout">
 
@@ -36,22 +40,22 @@
             android:layout_height="wrap_content"
             android:text="Add Reminder"
             android:id="@+id/addReminder"
-            android:textColor="@color/abc_secondary_text_material_dark"
-            android:background="@color/background_floating_material_dark"
-            android:layout_marginTop="30dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/roundbutton"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:textSize="15dp"
-            android:padding="20dp" />
+            android:padding="20dp"
+            />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Check Reminders"
             android:id="@+id/checkReminders"
-            android:textColor="@color/abc_secondary_text_material_dark"
-            android:background="@color/background_floating_material_dark"
-            android:layout_marginTop="10dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/roundbutton"
+            android:layout_marginTop="30dp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:textSize="15dp"

@@ -29,6 +29,8 @@ public class dialogueBox extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        alarmService.mp.stop();
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             alarm_id = extras.getString("alarm_id");
@@ -64,8 +66,6 @@ public class dialogueBox extends Activity {
 
                 new deleteReminder().execute();
 
-                alarmService.mp.stop();
-
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("EXIT", true);
@@ -80,8 +80,6 @@ public class dialogueBox extends Activity {
             public void onClick(DialogInterface dialog, int which) {
 
                 dialog.dismiss();
-
-                alarmService.mp.stop();
 
                 new turnOnSnooze().execute();
 

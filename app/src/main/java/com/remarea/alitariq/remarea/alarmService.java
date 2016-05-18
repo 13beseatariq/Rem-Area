@@ -41,6 +41,11 @@ public class alarmService extends IntentService {
 
         LatLng curLocation = getCurrentLocation();
 
+        if(curLocation == null) {
+            Log.d("RemArea Exception", "In AlarmService. Current location not available!");
+            return;
+        }
+
         for(int i=0; i<list_data.length; i++){
             if((Boolean) list_data[i].get("snoozed")) {
                 if (!checkLocationDistance(curLocation, new LatLng((Double) list_data[i].get("lat"), (Double) list_data[i].get("lon")),
@@ -65,6 +70,7 @@ public class alarmService extends IntentService {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
+            criteria.setAccuracy(Criteria.ACCURACY_FINE);
 
             if (locationManager != null) {
                 String provider = locationManager.getBestProvider(criteria, true);
